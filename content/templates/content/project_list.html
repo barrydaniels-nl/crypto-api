@@ -1,0 +1,89 @@
+<!-- templates/registration/login.html -->
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-12">
+                    <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col"></th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Symbol</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Last Update</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for project in projects %}
+                        <tr>
+                            <td>{{ project.sort_order }}</td>
+                            <td><img src="{{ project.image_url }}" width="20"></td>
+                            <td>{{ project.name }}</td>
+                            <td>{{ project.symbol }}</td>
+                            <td>{{ project.description|truncatechars:100 }}</td>
+                            <td>{{ project.last_update|date:"d-m-Y H:i" }}</td>
+                            <td><a href="/content/projects/{{project.id}}/update" class="btn btn-primary">Edit</a></td>
+                            <td><a href="/content/projects/{{project.id}}/delete" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>                    
+                    </table>
+                    {% if is_paginated %}
+                    <nav>
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                            {% else %}
+                                <li class="disabled page-item"><span><li style="color:black" class="fa fa-chevron-left page-link" aria-hidden="true">Previous</i></span></li>
+                            {% endif %}
+                            
+                            {% if page_obj.number|add:'-4' > 1 %}
+                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.number|add:'-5' }}"></a></li>
+                            {% endif %}
+                            
+                            {% for i in page_obj.paginator.page_range %}
+                                {% if page_obj.number == i %}
+                                    <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+                                {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}
+                                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            
+                            {% if page_obj.paginator.num_pages > page_obj.number|add:'4' %}
+                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.number|add:'5' }}">&hellip;</a></li>
+                            {% endif %}
+                            
+                            {% if page_obj.has_next %}
+                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                            {% else %}
+                                <li class="disabled page-item"><span style="color:black">Next</span></li>
+                            {% endif %}                                    
+                        </ul>                        
+                    </nav>
+                    {% endif %}
+                </div>
+            </div>
+
+{% else %}
+<div class="row">
+    <div class="col-7">
+        <div class="alert alert-danger" role="alert">
+            Please authenticate first..
+        </div>
+    </div>
+</div>      
+{% endif %}
+
+{% endblock content %}

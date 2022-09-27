@@ -1,0 +1,54 @@
+.info-field {
+    background-color: #ededed;
+    padding: 10px;
+    margin-bottom:10px;
+}
+
+.article-section {
+    background: white;
+}
+
+body {
+    background-color: #ededed;
+}
+
+.publish {
+    width:100%;
+    font-size: large;
+}
+
+.delete {
+    width:100%;
+    font-size: large;
+}
+
+.generated-btn {
+    padding:5px;
+    margin:5px;
+}
+
+#id_title {
+    font-weight:bold;
+    font-size:1.2em;
+}
+
+#id_message {
+    font-weight:bold;
+    font-size:1.2em;
+}
+
+#categories {
+    margin-top:20px
+}
+
+#sentiment {
+    margin-top:20px;
+}
+
+#expert_level {
+    margin-top:20px;
+}
+
+.buttons {
+    margin-top:20px;
+}

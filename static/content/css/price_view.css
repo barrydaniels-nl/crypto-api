@@ -1,0 +1,101 @@
+
+tr:first-child th
+{
+    font-size:14px;
+    color:rgb(238, 238, 238);
+    border:0px;
+    background-color:rgb(189, 189, 189);
+}
+
+.price_table {
+    font-family: Inter;
+
+}
+
+.price_row {
+    height:60px;
+    background-color:rgb(249, 249, 249);
+    border-bottom:0.2px solid rgb(216, 216, 216);
+}
+
+.price_id {
+    width:45px;
+    color:gray;
+    font-size:14px;
+}
+
+.price_name_group {
+    width:400px;
+}
+
+.price_image_box {
+    height:20px;
+    width:20px;
+    float:left;
+    margin-right:10px;
+    padding-top:3px;
+}
+
+.price_image {
+    width:100%;
+    padding:0;
+    margin:0;
+    float:left;
+    margin-right:5px;
+}
+
+.price_name {
+    font-size:16px;
+    float:left;
+    margin-right:8px;
+}
+
+.price_symbol {
+    font-size:12px;
+    font-weight:lighter;
+    color:rgb(173, 173, 173);
+    float:left;
+    margin-right:8px;
+    vertical-align: middle;
+    padding-top:4px
+}
+
+.price_price{
+    width:200px;
+    text-align:right;
+}
+
+.price_change_positive {
+    color:green;
+    text-align:right;
+}
+
+.price_change_negative {
+    color:red;
+    text-align:right;
+}
+.price_volume_24h {
+    width:200px;
+    text-align:right;
+}
+
+.price_marketcap {
+    width:200px;
+    text-align:right;
+}
+
+.price_buy {
+    width:200px;
+    text-align:right;
+}
+
+.buybutton {
+    background: #F1CC00;
+    border-radius: 11px;
+    font-family: Helvetica;
+    font-size: 14px;
+    color: #3E3C3C;
+    height:30px;
+    margin-right:20px;
+}
+

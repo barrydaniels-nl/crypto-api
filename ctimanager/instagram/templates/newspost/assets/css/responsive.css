@@ -1,0 +1,90 @@
+/* XL Device :1200px. */
+@media (min-width: 1200px) and (max-width: 1449px) {
+
+}
+
+/* LG Device :992px. */
+@media (min-width: 992px) and (max-width: 1200px) {
+
+
+}
+
+ 
+/* MD Device :768px. */
+@media (min-width: 768px) and (max-width: 991px) {
+
+.text {
+	width: auto;
+	font-family: 'Roboto', sans-serif;
+	text-align: center;
+	margin: 0 auto;
+	padding-top: 70px;
+}    
+    
+    
+.text h2 {
+	line-height: 111.59px;
+	font-size: 74px;
+}
+    
+}
+ 
+
+/* SM Small Device :320px. */
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+
+    
+.header_bg {
+	height: 770px;
+}
+    
+    
+    .text {
+	width: auto;
+	text-align: center;
+	margin: 0 auto;
+}
+.text h2 {
+	line-height: 58.59px;
+	font-size: 32px;
+}
+.btn {
+	justify-content: center;
+	min-width: 9rem;
+	height: 3.3rem;
+	width: 16rem;
+	font-size: 22px;
+	margin: 7px;
+}
+  
+    
+.footer p {
+	font-size: 20px;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+/* SM Small Device :550px. */
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+
+ 
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+    </style>
+    <!-- Bootstrap CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/all.min.css" rel="stylesheet" />
+    <link href="assets/css/fontawesome.css" rel="stylesheet" />
+    <link href="assets/css/owl.carousel.min.css" rel="stylesheet" />
+    <link href="assets/css/default.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/responsive.css" rel="stylesheet" />
+
+    <title>Hello, world!</title>
+</head>
+
+<body>
+
+
+    <div class="header_area">
+        <div class="header_bg" id="image" data-background=""></div>
+    </div>
+    <div class="text-area">
+        <div class="text-background">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text">
+                            <h2 id="title"></h2>
+                        </div>
+                        <div class="footer">
+                            <p id="published"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-md-10 p-10">
+                        <div class="btn-txt" id="projects">
+
+                        </div>
+                    </div>
+                    <div class="col-1"></div>    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/popper.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    
+    const image = urlParams.get('image')
+    document.getElementById('image').setAttribute('data-background',image)
+    console.log(image);
+
+    const title = urlParams.get('title')
+    document.getElementById('title').innerHTML = title
+    console.log(title);
+    
+    const projects = urlParams.get('projects')
+    console.log(projects);
+    if (projects) {
+        all_projects = projects.split(',');
+        all_projects.forEach(element => {
+            document.getElementById('projects').innerHTML += '<a class="btn">' + element + '</a>';
+        });
+    }
+    
+    const published = urlParams.get('published')
+    document.getElementById('published').innerHTML = published;
+    console.log(published);
+
+        
+    
+
+    </script>
+</body>
+
+</html>

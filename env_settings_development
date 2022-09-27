@@ -1,0 +1,6 @@
+export DEBUG=True
+export DJANGO_DEBUG=True
+export DJANGO_SETTINGS_MODULE="ctimanager.settings"
+export DATABASE_URL=""
+export HOSTNAME="https://127.0.0.1"
+export DJANGO_ALLOWED_HOSTS="127.0.0.1,localhost"

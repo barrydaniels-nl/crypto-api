@@ -1,0 +1,58 @@
+
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8 mb-4">
+        <h1><strong>CryptAPI</strong> login</h1>
+    </div>
+    <div class="col-2"></div>
+</div>
+
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            
+            <div class="row">
+                <div class="col-12">
+                {{ form.username|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                {{ form.password|as_crispy_field }}
+                </div>
+            </div>
+            
+    </div>
+</div>
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+        {% if form.errors %}
+            <p></p><strong class="text-danger">Your username and password didn't match. Please try again.</strong></p>
+        {% endif %}
+    </div>
+    <div class="col-2"></div>
+    
+</div>
+<div class="row">
+        <div class="col-2"></div>
+        <div class="col-6">
+            <input class="btn btn-primary" type="submit" value="login">
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+        </div>
+        <div class="col-2 text-end">
+            <a class="btn btn-light btn-sm" href="{% url 'password_reset' %}">Lost password?</a>
+        </div>
+        <div class="col-2"></div>        
+</div>
+
+
+{% endblock %}

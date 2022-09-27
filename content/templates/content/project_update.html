@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-12">
+                    <form method="post">{% csrf_token %}
+                        {{ form|crispy }}
+                        <input type="submit" value="Update">
+                    </form>
+                </div>
+            </div>
+
+{% else %}
+<div class="row">
+    <div class="col-7">
+        <div class="alert alert-danger" role="alert">
+            Please authenticate first..
+        </div>
+    </div>
+</div>      
+{% endif %}
+
+{% endblock content %}

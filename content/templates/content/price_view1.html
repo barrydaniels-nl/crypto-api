@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% load humanize %}
+{% load shrink_number %}
+
+{% if user.is_authenticated %}
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-12">
+                    <table class="table price_table">
+                    <thead>
+                        <tr>
+                            <th scope="col price_id" class="w-5">#</th>
+                            <th scope="col price_name" class="w-20">NAME</th>
+                            <th scope="col price_price" class="w-10 text-end">PRICE</th>
+                            <th scope="col price_1h_change" class="w-20 text-end">1H CHANGE</th>
+                            <th scope="col price_24h_change" class="w-20 text-end">24H CHANGE</th>
+                            <th scope="col price_7d_change" class="w-20 text-end">7D CHANGE</th>
+                            <th scope="col price_24h_volume" class="w-10 text-end">24H VOLUME</th>
+                            <th scope="col price_marketcap" class="w-10 text-end">MARKETCAP</th>
+                            <th scope="col price_buy" class="w-30 "></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for price in prices %}
+                        <tr class="price_row">
+                            <td class="w-5 price_id align-middle">{{ price.project.marketcap_rank }}</td>
+                            <td class="w-20 price_name_group align-middle"><div class="price_image_box"><img class="price_image" src="{{ price.project.image_url }}"></div><div class="price_name">{{price.project.name}}</div><div class="price_symbol">{{ price.project.symbol|upper }}</div></td>
+                            <td class="w-10 price_price align-middle">$ {{ price.price|intcomma }}</td>
+
+                            {% if price.price_change_percent_1h > 0 %}
+                                <td class="w-20 price_change_positive align-middle">{{ price.price_change_percent_1h|floatformat:"2g" }} %</td>
+                            {% else %}
+                                <td class="w-20 price_change_negative align-middle">{{ price.price_change_percent_1h|floatformat:"2g" }} %</td>
+                            {% endif %}
+
+                            {% if price.price_change_percent_24h > 0 %}
+                                <td class="w-20 price_change_positive align-middle">{{ price.price_change_percent_24h|floatformat:"2g" }} %</td>
+                            {% else %}
+                                <td class="w-20 price_change_negative align-middle">{{ price.price_change_percent_24h|floatformat:"2g" }} %</td>
+                            {% endif %}
+                            
+                            {% if price.price_change_percent_7d > 0 %}
+                                <td class="w-20 price_change_positive align-middle">{{ price.price_change_percent_7d|floatformat:"2g" }} %</td>
+                            {% else %}
+                                <td class="w-20 price_change_negative align-middle">{{ price.price_change_percent_7d|floatformat:"2g" }} %</td>
+                            {% endif %}                            
+
+                            <td class="w-10 price_volume_24h align-middle">{{ price.volume_24h|shrink_number }}</td>
+                            <td class="w-10 price_marketcap align-middle">{{ price.marketcap|shrink_number }}</td>
+                            <td class="w-30 price_buy align-middle"><a target="_blank" href="https://www.binance.com/en/buy-sell-crypto?channel=hzBankcard&fiat=USD&crypto={{price.project.symbol}}&ref=OS9EW77D"><button class="btn btn-sm buybutton">BUY</button></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>                    
+                    </table>
+                    {% if is_paginated %}
+                    <nav>
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                            {% else %}
+                                <li class="disabled page-item"><span><li style="color:black" class="fa fa-chevron-left page-link" aria-hidden="true">Previous</i></span></li>
+                            {% endif %}
+                            
+                            {% if page_obj.number|add:'-4' > 1 %}
+                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.number|add:'-5' }}">&hellip;</a></li>
+                            {% endif %}
+                            
+                            {% for i in page_obj.paginator.page_range %}
+                                {% if page_obj.number == i %}
+                                    <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only"></span></span></li>
+                                {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}
+                                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            
+                            {% if page_obj.paginator.num_pages > page_obj.number|add:'4' %}
+                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.number|add:'5' }}">&hellip;</a></li>
+                            {% endif %}
+                            
+                            {% if page_obj.has_next %}
+                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                            {% else %}
+                                <li class="disabled page-item"><span style="color:black">Next</span></li>
+                            {% endif %}                                    
+                        </ul>                        
+                    </nav>
+                    {% endif %}
+                </div>
+            </div>
+
+{% else %}
+<div class="row">
+    <div class="col-7">
+        <div class="alert alert-danger" role="alert">
+            Please authenticate first..
+        </div>
+    </div>
+</div>      
+{% endif %}
+
+{% endblock content %}

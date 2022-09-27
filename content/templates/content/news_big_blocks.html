@@ -1,0 +1,107 @@
+<!-- templates/registration/login.html -->
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-12">
+                    <div class="col-12">
+
+                        {% for news in newsitems %}
+
+                        <div class="newsitem m-2">
+                            <div class="header_area">
+                                <div class="header_bg" data-background="https://cryptapi-news-images.ams3.digitaloceanspaces.com/news_image_{{news.id}}.png">
+                                    <div class="container">
+                                        <div class="row">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="text-area">
+                                <div class="text-background">
+                                    <div class="main-container">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="text">
+                                                    <h2><a href="{{news.article_url}}" target="_blank">{{news.title}}</a></h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 mt-4 d-flex justify-content-center">
+                                                    {% if news.projects.all is not None %}
+                                                        {% for project in news.projects.all %}
+                                                        <div class="btn-txt">
+                                                            <a class="btn" href="{{project.homepage}}">{{project.name}}</a> 
+                                                        </div>                                            
+                                                        {% endfor %}
+                                                    {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="footer">
+                                        <p>{{news.published_at}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                      
+                    </div>
+                </div>
+            </div>                  
+
+
+
+
+
+
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-11">
+                    {% if is_paginated %}
+                    <nav>
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                            {% else %}
+                                <li class="disabled page-item"><span><li style="color:black" class="fa fa-chevron-left page-link" aria-hidden="true">Previous</i></span></li>
+                            {% endif %}
+                            
+                            {% if page_obj.number|add:'-4' > 1 %}
+                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.number|add:'-5' }}"></a></li>
+                            {% endif %}
+                            
+                            {% for i in page_obj.paginator.page_range %}
+                                {% if page_obj.number == i %}
+                                    <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+                                {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}
+                                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            
+                            {% if page_obj.paginator.num_pages > page_obj.number|add:'4' %}
+                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.number|add:'5' }}">&hellip;</a></li>
+                            {% endif %}
+                            
+                            {% if page_obj.has_next %}
+                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                            {% else %}
+                                <li class="disabled page-item"><span style="color:black">Next</span></li>
+                            {% endif %}                                    
+                        </ul>                        
+                    </nav>
+                    {% endif %}
+
+{% endif %}
+
+{% endblock content %}

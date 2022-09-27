@@ -1,0 +1,175 @@
+<!-- templates/registration/login.html -->
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+{% load tz %}
+{% block content %}
+
+{% if user.is_authenticated %}
+    
+    {% if news %}
+            <form action="{% url 'content:news-monitor-update' news.id %}" method="POST" id="newsMonitorForm">
+            {% csrf_token %}    
+            <div class="container-fluid">
+                <div class="row" style="margin-top:20px;margin-bottom:20px;padding-top:10px;">
+                    <div class="col-md-3">
+                        <strong>Source</strong>
+                        <p>{{ news.source }}</p>
+                    </div>
+                <div class="col-md-3">
+                    <strong>Publish date</strong>
+                    <p>{{ news.published_at|localtime }}</p>
+                </div>
+                <div class="col-md-3">
+                    <strong>URL</strong>
+                    <p><a href="{{ news.article_url }}" target="_blank">{{ news.article_url|truncatechars:25 }}</a></p>
+                </div>    
+                <div class="col-md-3">
+                    <strong>Unchecked Items</strong>
+                    <p>{{ left }}</p>
+                </div>    
+                </div>                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12 mb-4">
+                                <p>Image</p>
+                                {% if news.image %}
+                                    <img src="{{ news.image }}" height="200">
+                                {% else %}
+                                    <p>No Image</p>
+                                {% endif %}
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form.title|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6" id="projects">
+                            {{ form.projects|as_crispy_field }}
+                        </div>      
+                        <div class="col-6 text-center" id="categories">
+                            {{ form.categories|as_crispy_field }}
+                        </div>                         
+                    </div>
+                    <div class="row">
+                        <div class="col-6" id="tags">
+                            {{ form.tags|as_crispy_field }}
+                        </div>
+                        <div class="col-6 text-center" id="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 text-center" id="sentiment">
+                            {{ form.sentiment }}
+                            <p><strong>Sentiment</strong></p>
+                            <button class="btn btn-success rounded-circle" id="sentiment-positive" style="width:100px;height:100px;"></button>
+                            <button class="btn btn-warning rounded-circle" id="sentiment-neutral" style="width:100px;height:100px;"></button>
+                            <button class="btn btn-danger rounded-circle" id="sentiment-negative" style="width:100px;height:100px;"></button>
+                        </div>                                    
+                        <div class="col-6 text-center" id="expert_level">
+                            <p><strong>Expert Level</strong></p>                                   
+                            {{ form.expert_level }}                                    
+                        </div>
+                    </div>                   
+                    <div class="row buttons">
+                        <div class="col-md-6 mb-2">
+                            <input type="hidden" name='status' value='PUBLISHED'><button type="submit" class="btn btn-success publish" onclick="submitNewsMonitorForm()">Publish</button>     
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <a href="{% url 'content:news-monitor-delete' news.id %}" class="btn btn-danger delete">Delete</a>
+                        </div>
+                    </div>
+                    <div class="row buttons">
+                        <div class="col-md-6 mb-2">
+                            <a href="{% url 'content:news-monitor-update-all' %}" class="btn btn-success publish">Approve All</a>   
+                        </div>
+                        <div class="col-md-6 mb-2">
+                        </div>
+                    </div>
+            </div>
+                    </form>
+    
+                    <script>
+                        function addTag(data){
+                            console.log("csrf token:" + "{{ csrf_token }}");
+                            $.ajaxSetup({
+                                beforeSend: function(xhr, settings) {
+                                    function getCookie(name) {
+                                        var cookieValue = null;
+                                        if (document.cookie && document.cookie != '') {
+                                            var cookies = document.cookie.split(';');
+                                            for (var i = 0; i < cookies.length; i++) {
+                                                var cookie = jQuery.trim(cookies[i]);
+                                                // Does this cookie string begin with the name we want?
+                                                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        return cookieValue;
+                                    }
+                                    if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                                        // Only send the token to relative URLs i.e. locally.
+                                        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                                    }
+                                }
+                            });
+                    
+                            $.ajax({
+                                    type: "POST",
+                                    url: "/api/tags/add",
+                                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                                    data: {
+                                        'name': data
+                                    },
+                                    crossDomain: true,
+                                    success: function (data, status, jqXHR) {
+                                        console.log("Added tag to the database");
+                                        window.location.reload();
+                                    },
+                                    error: function (jqXHR, status) {
+                                        console.log(jqXHR);
+                                     
+                                    }
+                                });
+                        }
+                        </script>  
+            {% else %}
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h1 class="mt-5">No news to monitor</h1>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                // sleep for seconds and redirect to news monitor
+                setTimeout(function(){
+                    window.location.href = "{% url 'content:news-monitor' %}";
+                }, 5000);
+            </script>
+
+        {% endif %}
+            
+    {% else %}
+    <div class="row">
+        <div class="col-6">
+            <div class="alert alert-danger" role="alert">
+                You do not have access to this project
+            </div>
+        </div>
+    </div>    
+    {% endif %}
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>CryptAPI - Management Portal</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+        <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Inter">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.1.1/dist/select2-bootstrap-5-theme.min.css" />
+        <link rel="stylesheet" href="{% static 'content/css/news-monitor-form.css' %}" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'content/css/base.css' %}" crossorigin="anonymous">
+        {% if request.path == '/content/price' %}
+        <link rel="stylesheet" href="{% static 'content/css/price_view.css' %}" crossorigin="anonymous">
+        {% endif %}
+        {% if request.path == '/content/news/' %}
+        <link rel="stylesheet" href="{% static 'content/css/news-view-blocks.css' %}" crossorigin="anonymous">
+        {% endif %}
+        {% if request.path == '/content/newsblocks/' %}
+        <link href="{% static 'content/css/fontawesome.css' %}" rel="stylesheet" />
+        <link href="{% static 'content/css/responsive.css' %}" rel="stylesheet" />
+        <link href="{% static 'content/css/default.css' %}" rel="stylesheet" />
+        <link rel="stylesheet" href="{% static 'content/css/bigblocks.css' %}" crossorigin="anonymous">
+
+        {% endif %}
+        
+    </head>
+    <body>
+        {% if user.is_authenticated %}
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">Crytpo API Manager</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="/content/price">Price</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/content/projects">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/content/status_images">Statistics</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">News</a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/">All News List</a></li>
+                                <li><a class="dropdown-item" href="/content/news">All News Blocks</a></li>
+                                <li><a class="dropdown-item" href="/content/newsblocks">All News Big Blocks</a></li>
+                                <li><a class="dropdown-item" href="/content/news-monitor">Monitor News</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="/accounts/logout">Logout {{ user.username|capfirst }}</button></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        {% endif %}
+            
+        <!-- Page content-->
+        <div class="container mt-4">
+            {% block content %}
+            {% endblock content %}
+        </div>
+        
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="{% static 'content/js/news-monitor-form.js' %}"></script>
+        <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+        <script src="{% static 'content/js/base.js' %}"></script>
+    </body>
+</html>

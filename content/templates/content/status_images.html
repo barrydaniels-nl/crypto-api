@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+            <div class="row mt-4">
+                <div class="col-1">
+                </div>
+                <div class="col-12">
+                    <div class="row mt-4">
+                        <div class="col-4">
+                            <img src="https://cryptapi-news-images.ams3.digitaloceanspaces.com/gainers_1h_100.png" width="400">
+                        </div>
+                        <div class="col-4">
+                            <img src="https://cryptapi-news-images.ams3.digitaloceanspaces.com/gainers_24h_100.png" width="400">
+                        </div>
+                        <div class="col-4">
+                            <img src="https://cryptapi-news-images.ams3.digitaloceanspaces.com/gainers_7d_100.png" width="400">
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-4">
+                            <img src="https://cryptapi-news-images.ams3.digitaloceanspaces.com/losers_1h_100.png" width="400">
+                        </div>
+                        <div class="col-4">
+                            <img src="https://cryptapi-news-images.ams3.digitaloceanspaces.com/losers_24h_100.png" width="400">
+                        </div>
+                        <div class="col-4">
+                            <img src="https://cryptapi-news-images.ams3.digitaloceanspaces.com/losers_7d_100.png" width="400">
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-4">
+                            <img src="https://cryptapi-news-images.ams3.digitaloceanspaces.com/volume_increase_100.png" width="400">
+                        </div>
+                        <div class="col-4">
+                            <img src="https://cryptapi-news-images.ams3.digitaloceanspaces.com/volume_decrease_100.png" width="400">
+                        </div>
+                        <div class="col-4">
+                            <img src="https://cryptapi-news-images.ams3.digitaloceanspaces.com/trending.png" width="400">
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-4">
+                            <img src="https://cryptapi-news-images.ams3.digitaloceanspaces.com/insta_top_trending.png" width="400">
+                        </div>
+                        <div class="col-4">
+                            <img src="https://cryptapi-news-images.ams3.digitaloceanspaces.com/insta_gainers_losers_24h.png" width="400">
+                        </div>
+                        <div class="col-4">
+                            <img src="https://cryptapi-news-images.ams3.digitaloceanspaces.com/insta_gainers_losers_7d.png" width="400">
+                        </div>
+                    </div>                      
+                </div>
+            </div>
+
+{% else %}
+<div class="row">
+    <div class="col-7">
+        <div class="alert alert-danger" role="alert">
+            Please authenticate first..
+        </div>
+    </div>
+</div>      
+{% endif %}
+
+{% endblock content %}

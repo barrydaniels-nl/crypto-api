@@ -1,0 +1,3 @@
+* * * * * /usr/bin/env bash -c 'cd /home/cryptapi/cryptapi && source venv/bin/activate && export DJANGO_SETTINGS_MODULE='ctimanager.settings' && cd /home/cryptapi/cryptapi/ctimanager/scripts && python update_coin_prices.py'
+*/10 * * * * /usr/bin/env bash -c 'cd /home/cryptapi/cryptapi && source venv/bin/activate && export DJANGO_SETTINGS_MODULE='ctimanager.settings' && cd /home/cryptapi/cryptapi/ctimanager/scripts && python update_news_items.py'
+23 03 * * * /usr/bin/env bash -c 'cd /home/cryptapi/cryptapi && source venv/bin/activate && export DJANGO_SETTINGS_MODULE='ctimanager.settings' && cd /home/cryptapi/cryptapi/ctimanager/scripts && python update_coin_items.py'

@@ -1,0 +1,97 @@
+/* Base CSS */
+.alignleft {
+    float: left;
+    margin-right: 15px;
+}
+.alignright {
+    float: right;
+    margin-left: 15px;
+}
+.aligncenter {
+    display: block;
+    margin: 0 auto 15px;
+}
+a:focus { outline: 0 solid }
+img {
+    max-width: 100%;
+    height: auto;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 15px;
+  color: #303033;font-weight: 900;
+  
+}
+body {
+  color: #787878;
+  font-weight: 400;
+  font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+}
+
+
+.header_bg {
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 600px;
+	width: 100%;
+}
+.text {
+	font-family: 'Roboto', sans-serif;
+	text-align: center;
+	margin: 0 auto;
+	padding-top: 70px;
+	padding-left:20px;
+	padding-right:20px;
+}
+.text h2 {
+	line-height: 117.59px;
+	font-size: 96px;
+	color: #4D4D4D;
+}
+
+.text-background {
+	background: #fff;
+	border-radius: 28px;
+	margin-top: -20px;
+}
+
+.btn-txt {
+	text-align: center !important;
+	display: flex;
+	justify-content: center;
+    margin-top: 50px;
+	font-family: 'Abel-Regular.ttf;; margin-top: 100px;
+}
+
+.btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 13px;
+	color: #fff;
+	background: #25B59B;
+	margin: 12px;
+	font-size: 36px;
+}
+
+.btn-txt .btn:hover {
+	color: #fff;
+}
+
+.footer {
+	margin-top: 50px;
+	text-align: center;
+}
+.footer p {
+	font-size: 32px;
+	color: #B9B9B9;
+	font-weight: 500, Medium;
+	font-family: 'Roboto', sans-serif;
+}
+
