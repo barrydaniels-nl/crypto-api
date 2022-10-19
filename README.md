@@ -15,11 +15,10 @@
 ```
 
 ## Features
-```
+
 > API (news, prices, social media, projects)
 > News (import, manage)
 > Price component
 > Telegram bot
 > Instagram Price Posts
 > Twitter Price Posts
-```
